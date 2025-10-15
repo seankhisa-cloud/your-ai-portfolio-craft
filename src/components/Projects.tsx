@@ -33,7 +33,7 @@ const Projects = () => {
       source: '#',
     },
     {
-      title: 'Lovable AI Portfolio',
+      title: 'Laban Portfolio',
       description: 'AI-powered personal portfolio website showcasing projects, skills, and professional experience with modern design and smooth animations.',
       tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
       image: laban,
