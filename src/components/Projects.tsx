@@ -1,38 +1,42 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import loveamerifrikah from '@/assets/loveamerifrikah.png';
+import wakwetu from '@/assets/wakwetu.png';
+import quicklink from '@/assets/quicklink.png';
+import laban from '@/assets/laban.png';
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Parental Control App',
-      description: 'Android application for parents to monitor GPS location, app usage, and safety alerts using Firebase real-time database.',
-      tools: ['Android Studio', 'Java', 'Firebase', 'Google Maps API'],
-      image: '📱',
+      title: 'LoveAmeriAfrikah Enterprises',
+      description: 'International business consultancy and general merchant company website with modern design, bridging trade connections between continents.',
+      tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
+      image: loveamerifrikah,
       demo: '#',
       source: '#',
     },
     {
-      title: 'Revision App',
-      description: 'Student productivity and revision tracker with smart scheduling, progress monitoring, and performance analytics.',
+      title: 'Wakwetu Borehole Drilling',
+      description: 'Professional borehole drilling and water solutions website with AI chatbot integration for customer service and consultation.',
+      tools: ['React', 'Next.js', 'TailwindCSS', 'OpenAI API'],
+      image: wakwetu,
+      demo: '#',
+      source: '#',
+    },
+    {
+      title: 'QUICKLINK Services',
+      description: 'Multi-service platform app connecting customers with local stores, restaurants, drivers and service professionals for marketplace, food delivery, taxi and property services.',
       tools: ['React', 'Node.js', 'MongoDB', 'TailwindCSS'],
-      image: '📚',
+      image: quicklink,
       demo: '#',
       source: '#',
     },
     {
-      title: 'Loveable AI Portfolio',
-      description: 'AI-powered personal assistant portfolio website with intelligent chat interface and dynamic content generation.',
-      tools: ['React', 'TypeScript', 'TailwindCSS', 'OpenAI API'],
-      image: '🤖',
-      demo: '#',
-      source: '#',
-    },
-    {
-      title: 'Panda Tech Website',
-      description: 'Comprehensive web solution for business automation and IT consulting with modern design and seamless user experience.',
-      tools: ['React', 'Vite', 'Supabase', 'Framer Motion'],
-      image: '🐼',
+      title: 'Lovable AI Portfolio',
+      description: 'AI-powered personal portfolio website showcasing projects, skills, and professional experience with modern design and smooth animations.',
+      tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
+      image: laban,
       demo: '#',
       source: '#',
     },
@@ -58,8 +62,12 @@ const Projects = () => {
               className="overflow-hidden bg-card border-border hover:border-primary transition-all duration-300 group animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-background flex items-center justify-center text-8xl group-hover:scale-105 transition-transform">
-                {project.image}
+              <div className="aspect-video bg-gradient-to-br from-primary/20 to-background overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <div className="p-6 space-y-4">
                 <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
