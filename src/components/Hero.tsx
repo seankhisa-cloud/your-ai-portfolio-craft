@@ -32,7 +32,7 @@ const Hero = () => {
           <div className="text-center md:text-left order-2 md:order-2 space-y-6 animate-slide-up">
             <div className="space-y-2">
               <p className="text-primary text-lg font-medium">Hello, I'm</p>
-              <h1 className="text-5xl md:text-7xl font-bold glow-red">
+              <h1 className="text-5xl md:text-7xl font-bold">
                 Laban Khisa
               </h1>
               <div className="text-xl md:text-2xl text-muted-foreground space-y-1">
