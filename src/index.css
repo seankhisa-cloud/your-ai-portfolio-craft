@@ -43,6 +43,7 @@ All colors MUST be HSL.
     --neon-glow: 0 100% 50%;
     --gradient-start: 0 0% 4%;
     --gradient-end: 0 20% 8%;
+    --gold: 45 100% 60%;
   }
 }
 

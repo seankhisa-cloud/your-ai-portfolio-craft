@@ -34,10 +34,10 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* About Content */}
           <div className="space-y-6 animate-slide-up">
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--gold))' }}>
               I am a passionate Software Engineer and Data Scientist with a strong foundation in mathematics, information systems, and computing.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed">
+            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--gold))' }}>
               My journey combines analytical thinking with real-world problem solving — bridging data, technology, and human experience.
             </p>
             <Button

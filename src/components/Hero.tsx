@@ -35,14 +35,14 @@ const Hero = () => {
               <h1 className="text-5xl md:text-7xl font-bold">
                 Laban Khisa
               </h1>
-              <div className="text-xl md:text-2xl text-muted-foreground space-y-1">
+              <div className="text-xl md:text-2xl space-y-1" style={{ color: 'hsl(var(--gold))' }}>
                 <p>Software Engineer</p>
                 <p>Data Scientist</p>
                 <p>IT Consultant</p>
               </div>
             </div>
 
-            <p className="text-lg text-muted-foreground max-w-xl">
+            <p className="text-lg max-w-xl" style={{ color: 'hsl(var(--gold))' }}>
               Transforming data, code, and ideas into meaningful digital experiences.
             </p>
 
