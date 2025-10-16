@@ -1,5 +1,6 @@
 import { ArrowRight, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import profileImage from '@/assets/laban.png';
 
 const Hero = () => {
@@ -35,16 +36,18 @@ const Hero = () => {
               <h1 className="text-5xl md:text-7xl font-bold">
                 Laban Khisa
               </h1>
-              <div className="text-xl md:text-2xl space-y-1" style={{ color: 'hsl(var(--gold))' }}>
+            </div>
+
+            <Card className="inline-block bg-card/70 backdrop-blur-md border-border p-4 md:p-6">
+              <div className="text-xl md:text-2xl text-[hsl(var(--gold))] space-y-1">
                 <p>Software Engineer</p>
                 <p>Data Scientist</p>
                 <p>IT Consultant</p>
               </div>
-            </div>
-
-            <p className="text-lg max-w-xl" style={{ color: 'hsl(var(--gold))' }}>
-              Transforming data, code, and ideas into meaningful digital experiences.
-            </p>
+              <p className="mt-4 text-lg max-w-xl text-[hsl(var(--gold))]">
+                Transforming data, code, and ideas into meaningful digital experiences.
+              </p>
+            </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Button
