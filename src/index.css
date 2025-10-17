@@ -93,95 +93,147 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
-  .glow-red {
-    text-shadow: 0 0 10px hsl(var(--panda-red) / 0.8), 
-                 0 0 20px hsl(var(--panda-red) / 0.6),
-                 0 0 30px hsl(var(--panda-red) / 0.4);
+  /* 3D Block Text Effects */
+  .text-3d-red {
+    color: hsl(var(--panda-red));
+    text-shadow: 
+      1px 1px 0 hsl(var(--panda-red) / 0.8),
+      2px 2px 0 hsl(var(--panda-red) / 0.7),
+      3px 3px 0 hsl(var(--panda-red) / 0.6),
+      4px 4px 0 hsl(var(--panda-red) / 0.5),
+      5px 5px 0 hsl(var(--panda-red) / 0.4),
+      6px 6px 10px rgba(0, 0, 0, 0.5);
   }
 
-  .glow-orange {
-    text-shadow: 0 0 10px hsl(var(--panda-orange) / 0.8), 
-                 0 0 20px hsl(var(--panda-orange) / 0.6),
-                 0 0 30px hsl(var(--panda-orange) / 0.4);
+  .text-3d-orange {
+    color: hsl(var(--panda-orange));
+    text-shadow: 
+      1px 1px 0 hsl(var(--panda-orange) / 0.8),
+      2px 2px 0 hsl(var(--panda-orange) / 0.7),
+      3px 3px 0 hsl(var(--panda-orange) / 0.6),
+      4px 4px 0 hsl(var(--panda-orange) / 0.5),
+      5px 5px 0 hsl(var(--panda-orange) / 0.4),
+      6px 6px 10px rgba(0, 0, 0, 0.5);
   }
 
-  .glow-blue {
-    text-shadow: 0 0 10px hsl(var(--panda-blue) / 0.8), 
-                 0 0 20px hsl(var(--panda-blue) / 0.6),
-                 0 0 30px hsl(var(--panda-blue) / 0.4);
+  .text-3d-blue {
+    color: hsl(var(--panda-blue));
+    text-shadow: 
+      1px 1px 0 hsl(var(--panda-blue) / 0.8),
+      2px 2px 0 hsl(var(--panda-blue) / 0.7),
+      3px 3px 0 hsl(var(--panda-blue) / 0.6),
+      4px 4px 0 hsl(var(--panda-blue) / 0.5),
+      5px 5px 0 hsl(var(--panda-blue) / 0.4),
+      6px 6px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-3d-purple {
+    color: hsl(var(--panda-purple));
+    text-shadow: 
+      1px 1px 0 hsl(var(--panda-purple) / 0.8),
+      2px 2px 0 hsl(var(--panda-purple) / 0.7),
+      3px 3px 0 hsl(var(--panda-purple) / 0.6),
+      4px 4px 0 hsl(var(--panda-purple) / 0.5),
+      5px 5px 0 hsl(var(--panda-purple) / 0.4),
+      6px 6px 10px rgba(0, 0, 0, 0.5);
   }
 
   .gradient-bg {
     background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
   }
 
+  /* Enhanced 3D Card Effects - Tangible Blocks */
   .card-3d {
     transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .card-3d::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    transform: translateZ(-10px);
+    filter: brightness(0.7);
+    border-radius: inherit;
+    z-index: -1;
   }
 
   .card-3d:hover {
-    transform: translateY(-8px) rotateX(5deg) scale(1.02);
+    transform: translateY(-12px) translateZ(20px) rotateX(8deg);
   }
 
   .card-3d-red {
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--panda-red) / 0.15) 100%);
     box-shadow: 
-      0 10px 30px hsl(var(--shadow-3d-red) / 0.3),
-      0 1px 8px hsl(var(--shadow-3d-red) / 0.2),
-      inset 0 1px 0 hsl(var(--shadow-3d-red) / 0.1);
-    border: 1px solid hsl(var(--panda-red) / 0.3);
+      0 8px 0 hsl(var(--panda-red) / 0.4),
+      0 12px 0 hsl(var(--panda-red) / 0.3),
+      0 16px 0 hsl(var(--panda-red) / 0.2),
+      0 20px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid hsl(var(--panda-red) / 0.5);
   }
 
   .card-3d-red:hover {
     box-shadow: 
-      0 20px 60px hsl(var(--shadow-3d-red) / 0.5),
-      0 5px 20px hsl(var(--shadow-3d-red) / 0.4),
-      inset 0 1px 0 hsl(var(--shadow-3d-red) / 0.2);
+      0 12px 0 hsl(var(--panda-red) / 0.5),
+      0 18px 0 hsl(var(--panda-red) / 0.4),
+      0 24px 0 hsl(var(--panda-red) / 0.3),
+      0 30px 50px rgba(0, 0, 0, 0.6);
   }
 
   .card-3d-orange {
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--panda-orange) / 0.15) 100%);
     box-shadow: 
-      0 10px 30px hsl(var(--shadow-3d-orange) / 0.3),
-      0 1px 8px hsl(var(--shadow-3d-orange) / 0.2),
-      inset 0 1px 0 hsl(var(--shadow-3d-orange) / 0.1);
-    border: 1px solid hsl(var(--panda-orange) / 0.3);
+      0 8px 0 hsl(var(--panda-orange) / 0.4),
+      0 12px 0 hsl(var(--panda-orange) / 0.3),
+      0 16px 0 hsl(var(--panda-orange) / 0.2),
+      0 20px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid hsl(var(--panda-orange) / 0.5);
   }
 
   .card-3d-orange:hover {
     box-shadow: 
-      0 20px 60px hsl(var(--shadow-3d-orange) / 0.5),
-      0 5px 20px hsl(var(--shadow-3d-orange) / 0.4),
-      inset 0 1px 0 hsl(var(--shadow-3d-orange) / 0.2);
+      0 12px 0 hsl(var(--panda-orange) / 0.5),
+      0 18px 0 hsl(var(--panda-orange) / 0.4),
+      0 24px 0 hsl(var(--panda-orange) / 0.3),
+      0 30px 50px rgba(0, 0, 0, 0.6);
   }
 
   .card-3d-blue {
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--panda-blue) / 0.15) 100%);
     box-shadow: 
-      0 10px 30px hsl(var(--shadow-3d-blue) / 0.3),
-      0 1px 8px hsl(var(--shadow-3d-blue) / 0.2),
-      inset 0 1px 0 hsl(var(--shadow-3d-blue) / 0.1);
-    border: 1px solid hsl(var(--panda-blue) / 0.3);
+      0 8px 0 hsl(var(--panda-blue) / 0.4),
+      0 12px 0 hsl(var(--panda-blue) / 0.3),
+      0 16px 0 hsl(var(--panda-blue) / 0.2),
+      0 20px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid hsl(var(--panda-blue) / 0.5);
   }
 
   .card-3d-blue:hover {
     box-shadow: 
-      0 20px 60px hsl(var(--shadow-3d-blue) / 0.5),
-      0 5px 20px hsl(var(--shadow-3d-blue) / 0.4),
-      inset 0 1px 0 hsl(var(--shadow-3d-blue) / 0.2);
+      0 12px 0 hsl(var(--panda-blue) / 0.5),
+      0 18px 0 hsl(var(--panda-blue) / 0.4),
+      0 24px 0 hsl(var(--panda-blue) / 0.3),
+      0 30px 50px rgba(0, 0, 0, 0.6);
   }
 
   .card-3d-purple {
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--panda-purple) / 0.15) 100%);
     box-shadow: 
-      0 10px 30px hsl(var(--shadow-3d-purple) / 0.3),
-      0 1px 8px hsl(var(--shadow-3d-purple) / 0.2),
-      inset 0 1px 0 hsl(var(--shadow-3d-purple) / 0.1);
-    border: 1px solid hsl(var(--panda-purple) / 0.3);
+      0 8px 0 hsl(var(--panda-purple) / 0.4),
+      0 12px 0 hsl(var(--panda-purple) / 0.3),
+      0 16px 0 hsl(var(--panda-purple) / 0.2),
+      0 20px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid hsl(var(--panda-purple) / 0.5);
   }
 
   .card-3d-purple:hover {
     box-shadow: 
-      0 20px 60px hsl(var(--shadow-3d-purple) / 0.5),
-      0 5px 20px hsl(var(--shadow-3d-purple) / 0.4),
-      inset 0 1px 0 hsl(var(--shadow-3d-purple) / 0.2);
+      0 12px 0 hsl(var(--panda-purple) / 0.5),
+      0 18px 0 hsl(var(--panda-purple) / 0.4),
+      0 24px 0 hsl(var(--panda-purple) / 0.3),
+      0 30px 50px rgba(0, 0, 0, 0.6);
   }
 }
 

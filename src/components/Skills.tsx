@@ -59,7 +59,7 @@ const Skills = () => {
     <section id="skills" className="py-20 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-red">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-3d-blue">
             Skills & Expertise
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-8" />
@@ -74,7 +74,7 @@ const Skills = () => {
             const cardColors = ['card-3d-red', 'card-3d-orange', 'card-3d-blue'];
             const iconBgColors = ['bg-panda-red/10', 'bg-panda-orange/10', 'bg-panda-blue/10'];
             const iconColors = ['text-panda-red', 'text-panda-orange', 'text-panda-blue'];
-            const glowColors = ['glow-red', 'glow-orange', 'glow-blue'];
+            const textColors = ['text-3d-red', 'text-3d-orange', 'text-3d-blue'];
             return (
               <Card
                 key={index}
@@ -85,7 +85,7 @@ const Skills = () => {
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${iconBgColors[index]} mb-4 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className={`w-8 h-8 ${iconColors[index]}`} />
                   </div>
-                  <h3 className={`text-2xl font-bold transition-all duration-300 ${glowColors[index]}`}>
+                  <h3 className={`text-2xl font-bold transition-all duration-300 ${textColors[index]}`}>
                     {category.title}
                   </h3>
                 </div>

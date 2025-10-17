@@ -46,7 +46,7 @@ const Projects = () => {
     <section id="projects" className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-red">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-3d-red">
             Featured Projects
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-8" />
@@ -58,7 +58,7 @@ const Projects = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => {
             const cardColors = ['card-3d-red', 'card-3d-orange', 'card-3d-blue', 'card-3d-purple'];
-            const glowColors = ['glow-red', 'glow-orange', 'glow-blue', 'glow-blue'];
+            const textColors = ['text-3d-red', 'text-3d-orange', 'text-3d-blue', 'text-3d-purple'];
             return (
               <Card
                 key={index}
@@ -74,7 +74,7 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="p-6 space-y-4">
-                  <h3 className={`text-2xl font-bold transition-all duration-300 ${glowColors[index % 4]}`}>
+                  <h3 className={`text-2xl font-bold transition-all duration-300 ${textColors[index % 4]}`}>
                     {project.title}
                   </h3>
                   <p className="text-foreground/80">

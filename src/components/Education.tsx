@@ -30,7 +30,7 @@ const Education = () => {
     <section id="education" className="py-20 px-4 bg-secondary/30">
       <div className="container mx-auto max-w-4xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-red">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-3d-purple">
             Education
           </h2>
           <div className="w-20 h-1 bg-primary mx-auto mb-8" />
@@ -43,7 +43,7 @@ const Education = () => {
           {education.map((edu, index) => {
             const cardColors = ['card-3d-purple', 'card-3d-blue', 'card-3d-orange'];
             const iconBgColors = ['bg-panda-purple/10', 'bg-panda-blue/10', 'bg-panda-orange/10'];
-            const glowColors = ['glow-blue', 'glow-blue', 'glow-orange'];
+            const textColors = ['text-3d-purple', 'text-3d-blue', 'text-3d-orange'];
             return (
               <Card
                 key={index}
@@ -58,7 +58,7 @@ const Education = () => {
                   </div>
                   <div className="flex-1 space-y-4">
                     <div>
-                      <h3 className={`text-2xl font-bold mb-2 transition-all duration-300 ${glowColors[index % 3]}`}>
+                      <h3 className={`text-2xl font-bold mb-2 transition-all duration-300 ${textColors[index % 3]}`}>
                         {edu.degree}
                       </h3>
                       <div className="flex flex-col md:flex-row md:items-center gap-2 text-foreground/70">

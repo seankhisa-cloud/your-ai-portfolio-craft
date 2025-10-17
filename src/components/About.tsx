@@ -25,7 +25,7 @@ const About = () => {
     <section id="about" className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 glow-orange">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-3d-orange">
             About Me
           </h2>
           <div className="w-20 h-1 bg-panda-orange mx-auto mb-8" />
@@ -35,7 +35,7 @@ const About = () => {
           {/* About Content */}
           <div className="space-y-6 animate-slide-up">
             <Card className="p-6 bg-card/80 backdrop-blur-md card-3d-orange border-panda-orange/30">
-              <p className="text-lg leading-relaxed text-panda-orange glow-orange">
+              <p className="text-lg leading-relaxed text-panda-orange text-3d-orange">
                 I am a passionate Software Engineer and Data Scientist with a strong foundation in mathematics, information systems, and computing.
               </p>
               <p className="mt-4 text-lg leading-relaxed text-foreground/80">
@@ -66,7 +66,7 @@ const About = () => {
                       {edu.icon}
                     </div>
                     <div className="flex-1">
-                      <h3 className={`text-xl font-semibold mb-2 transition-colors ${glowColors[index]}`}>
+                      <h3 className={`text-xl font-semibold mb-2 transition-colors ${glowColors[index]} ${index === 0 ? 'text-3d-blue' : index === 1 ? 'text-3d-purple' : 'text-3d-red'}`}>
                         {edu.degree}
                       </h3>
                       <p className="text-foreground/70">{edu.institution}</p>

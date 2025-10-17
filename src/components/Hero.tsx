@@ -33,14 +33,14 @@ const Hero = () => {
           {/* Hero Content */}
           <div className="text-center md:text-left order-2 md:order-2 space-y-6 animate-slide-up">
             <div className="space-y-2">
-              <p className="text-panda-orange text-lg font-medium glow-orange">Hello, I'm</p>
-              <h1 className="text-5xl md:text-7xl font-bold glow-red">
+              <p className="text-panda-orange text-lg font-medium text-3d-orange">Hello, I'm</p>
+              <h1 className="text-5xl md:text-7xl font-bold text-3d-red">
                 Laban Khisa
               </h1>
             </div>
 
             <Card className="inline-block bg-card/80 backdrop-blur-md card-3d-blue border-panda-blue/30 p-4 md:p-6">
-              <div className="text-xl md:text-2xl text-panda-orange space-y-1 glow-orange">
+              <div className="text-xl md:text-2xl text-panda-orange space-y-1 text-3d-orange">
                 <p>Software Engineer</p>
                 <p>Data Scientist</p>
                 <p>IT Consultant</p>
