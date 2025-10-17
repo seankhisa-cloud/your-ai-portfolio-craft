@@ -71,17 +71,21 @@ const Skills = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
+            const cardColors = ['card-3d-red', 'card-3d-orange', 'card-3d-blue'];
+            const iconBgColors = ['bg-panda-red/10', 'bg-panda-orange/10', 'bg-panda-blue/10'];
+            const iconColors = ['text-panda-red', 'text-panda-orange', 'text-panda-blue'];
+            const glowColors = ['glow-red', 'glow-orange', 'glow-blue'];
             return (
               <Card
                 key={index}
-                className="p-8 bg-card border-border hover:border-primary transition-all duration-300 group animate-slide-up"
+                className={`p-8 bg-card/80 backdrop-blur-sm card-3d ${cardColors[index]} group animate-slide-up`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="text-center mb-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
-                    <Icon className="w-8 h-8 text-primary" />
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${iconBgColors[index]} mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className={`w-8 h-8 ${iconColors[index]}`} />
                   </div>
-                  <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
+                  <h3 className={`text-2xl font-bold transition-all duration-300 ${glowColors[index]}`}>
                     {category.title}
                   </h3>
                 </div>
@@ -89,7 +93,7 @@ const Skills = () => {
                   {category.skills.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="px-3 py-1.5 bg-background border border-border rounded-full text-sm hover:border-primary hover:text-primary transition-all cursor-default"
+                      className="px-3 py-1.5 bg-background/50 border border-panda-purple/30 rounded-full text-sm hover:border-panda-purple hover:text-panda-purple hover:bg-panda-purple/10 transition-all cursor-default"
                     >
                       {skill}
                     </span>

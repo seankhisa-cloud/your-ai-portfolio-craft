@@ -40,49 +40,54 @@ const Education = () => {
         </div>
 
         <div className="space-y-8">
-          {education.map((edu, index) => (
-            <Card
-              key={index}
-              className="p-8 bg-card border-border hover:border-primary transition-all duration-300 group animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-4xl group-hover:bg-primary/20 transition-colors">
-                    {edu.icon}
-                  </div>
-                </div>
-                <div className="flex-1 space-y-4">
-                  <div>
-                    <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
-                      {edu.degree}
-                    </h3>
-                    <div className="flex flex-col md:flex-row md:items-center gap-2 text-muted-foreground">
-                      <span className="flex items-center gap-2">
-                        <GraduationCap className="w-4 h-4" />
-                        {edu.institution}
-                      </span>
-                      <span className="hidden md:block">•</span>
-                      <span>{edu.period}</span>
+          {education.map((edu, index) => {
+            const cardColors = ['card-3d-purple', 'card-3d-blue', 'card-3d-orange'];
+            const iconBgColors = ['bg-panda-purple/10', 'bg-panda-blue/10', 'bg-panda-orange/10'];
+            const glowColors = ['glow-blue', 'glow-blue', 'glow-orange'];
+            return (
+              <Card
+                key={index}
+                className={`p-8 bg-card/80 backdrop-blur-sm card-3d ${cardColors[index % 3]} group animate-slide-up`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <div className={`w-20 h-20 rounded-full ${iconBgColors[index % 3]} flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-300`}>
+                      {edu.icon}
                     </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-2">Focus Areas:</p>
-                    <div className="flex flex-wrap gap-2">
-                      {edu.focus.map((area, areaIndex) => (
-                        <span
-                          key={areaIndex}
-                          className="px-3 py-1.5 bg-background border border-border rounded-full text-sm hover:border-primary hover:text-primary transition-all cursor-default"
-                        >
-                          {area}
+                  <div className="flex-1 space-y-4">
+                    <div>
+                      <h3 className={`text-2xl font-bold mb-2 transition-all duration-300 ${glowColors[index % 3]}`}>
+                        {edu.degree}
+                      </h3>
+                      <div className="flex flex-col md:flex-row md:items-center gap-2 text-foreground/70">
+                        <span className="flex items-center gap-2">
+                          <GraduationCap className="w-4 h-4 text-panda-cyan" />
+                          {edu.institution}
                         </span>
-                      ))}
+                        <span className="hidden md:block">•</span>
+                        <span>{edu.period}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm text-foreground/60 mb-2">Focus Areas:</p>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.focus.map((area, areaIndex) => (
+                          <span
+                            key={areaIndex}
+                            className="px-3 py-1.5 bg-background/50 border border-panda-cyan/30 rounded-full text-sm hover:border-panda-cyan hover:text-panda-cyan hover:bg-panda-cyan/10 transition-all cursor-default"
+                          >
+                            {area}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

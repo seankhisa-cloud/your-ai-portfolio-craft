@@ -8,42 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
+    --background: 222 47% 11%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 8%;
+    --card: 222 47% 11%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 6%;
+    --popover: 222 47% 11%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 72% 51%;
+    --primary: 0 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 12%;
+    --secondary: 222 47% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 15%;
+    --muted: 222 47% 20%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 0 72% 51%;
+    --accent: 25 100% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 0 72% 51%;
+    --border: 217 91% 60%;
+    --input: 222 47% 15%;
+    --ring: 0 100% 50%;
 
     --radius: 1rem;
 
-    /* Custom neon glow colors */
-    --neon-red: 0 72% 51%;
-    --neon-glow: 0 100% 50%;
-    --gradient-start: 0 0% 4%;
-    --gradient-end: 0 20% 8%;
-    --gold: 45 100% 60%;
+    /* Panda Tech Color Palette */
+    --panda-navy: 222 47% 11%;
+    --panda-red: 0 100% 50%;
+    --panda-orange: 25 100% 50%;
+    --panda-blue: 217 91% 60%;
+    --panda-purple: 270 70% 60%;
+    --panda-cyan: 187 100% 50%;
+    
+    /* 3D Card Shadows */
+    --shadow-3d-red: 0 100% 50%;
+    --shadow-3d-orange: 25 100% 50%;
+    --shadow-3d-blue: 217 91% 60%;
+    --shadow-3d-purple: 270 70% 60%;
+    
+    /* Gradients */
+    --gradient-start: 222 47% 11%;
+    --gradient-end: 222 47% 20%;
   }
 }
 
@@ -83,19 +94,94 @@ All colors MUST be HSL.
 
 @layer utilities {
   .glow-red {
-    text-shadow: 0 0 10px hsl(var(--neon-red) / 0.8), 
-                 0 0 20px hsl(var(--neon-red) / 0.6),
-                 0 0 30px hsl(var(--neon-red) / 0.4);
+    text-shadow: 0 0 10px hsl(var(--panda-red) / 0.8), 
+                 0 0 20px hsl(var(--panda-red) / 0.6),
+                 0 0 30px hsl(var(--panda-red) / 0.4);
   }
 
-  .glow-red-box {
-    box-shadow: 0 0 20px hsl(var(--neon-red) / 0.5), 
-                0 0 40px hsl(var(--neon-red) / 0.3),
-                0 0 60px hsl(var(--neon-red) / 0.1);
+  .glow-orange {
+    text-shadow: 0 0 10px hsl(var(--panda-orange) / 0.8), 
+                 0 0 20px hsl(var(--panda-orange) / 0.6),
+                 0 0 30px hsl(var(--panda-orange) / 0.4);
+  }
+
+  .glow-blue {
+    text-shadow: 0 0 10px hsl(var(--panda-blue) / 0.8), 
+                 0 0 20px hsl(var(--panda-blue) / 0.6),
+                 0 0 30px hsl(var(--panda-blue) / 0.4);
   }
 
   .gradient-bg {
     background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+  }
+
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s;
+  }
+
+  .card-3d:hover {
+    transform: translateY(-8px) rotateX(5deg) scale(1.02);
+  }
+
+  .card-3d-red {
+    box-shadow: 
+      0 10px 30px hsl(var(--shadow-3d-red) / 0.3),
+      0 1px 8px hsl(var(--shadow-3d-red) / 0.2),
+      inset 0 1px 0 hsl(var(--shadow-3d-red) / 0.1);
+    border: 1px solid hsl(var(--panda-red) / 0.3);
+  }
+
+  .card-3d-red:hover {
+    box-shadow: 
+      0 20px 60px hsl(var(--shadow-3d-red) / 0.5),
+      0 5px 20px hsl(var(--shadow-3d-red) / 0.4),
+      inset 0 1px 0 hsl(var(--shadow-3d-red) / 0.2);
+  }
+
+  .card-3d-orange {
+    box-shadow: 
+      0 10px 30px hsl(var(--shadow-3d-orange) / 0.3),
+      0 1px 8px hsl(var(--shadow-3d-orange) / 0.2),
+      inset 0 1px 0 hsl(var(--shadow-3d-orange) / 0.1);
+    border: 1px solid hsl(var(--panda-orange) / 0.3);
+  }
+
+  .card-3d-orange:hover {
+    box-shadow: 
+      0 20px 60px hsl(var(--shadow-3d-orange) / 0.5),
+      0 5px 20px hsl(var(--shadow-3d-orange) / 0.4),
+      inset 0 1px 0 hsl(var(--shadow-3d-orange) / 0.2);
+  }
+
+  .card-3d-blue {
+    box-shadow: 
+      0 10px 30px hsl(var(--shadow-3d-blue) / 0.3),
+      0 1px 8px hsl(var(--shadow-3d-blue) / 0.2),
+      inset 0 1px 0 hsl(var(--shadow-3d-blue) / 0.1);
+    border: 1px solid hsl(var(--panda-blue) / 0.3);
+  }
+
+  .card-3d-blue:hover {
+    box-shadow: 
+      0 20px 60px hsl(var(--shadow-3d-blue) / 0.5),
+      0 5px 20px hsl(var(--shadow-3d-blue) / 0.4),
+      inset 0 1px 0 hsl(var(--shadow-3d-blue) / 0.2);
+  }
+
+  .card-3d-purple {
+    box-shadow: 
+      0 10px 30px hsl(var(--shadow-3d-purple) / 0.3),
+      0 1px 8px hsl(var(--shadow-3d-purple) / 0.2),
+      inset 0 1px 0 hsl(var(--shadow-3d-purple) / 0.1);
+    border: 1px solid hsl(var(--panda-purple) / 0.3);
+  }
+
+  .card-3d-purple:hover {
+    box-shadow: 
+      0 20px 60px hsl(var(--shadow-3d-purple) / 0.5),
+      0 5px 20px hsl(var(--shadow-3d-purple) / 0.4),
+      inset 0 1px 0 hsl(var(--shadow-3d-purple) / 0.2);
   }
 }
 

@@ -56,55 +56,60 @@ const Projects = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card
-              key={index}
-              className="overflow-hidden bg-card border-border hover:border-primary transition-all duration-300 group animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-background overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-6 space-y-4">
-                <h3 className="text-2xl font-bold group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tools.map((tool, toolIndex) => (
-                    <span
-                      key={toolIndex}
-                      className="px-3 py-1 bg-background border border-border rounded-full text-sm"
+          {projects.map((project, index) => {
+            const cardColors = ['card-3d-red', 'card-3d-orange', 'card-3d-blue', 'card-3d-purple'];
+            const glowColors = ['glow-red', 'glow-orange', 'glow-blue', 'glow-blue'];
+            return (
+              <Card
+                key={index}
+                className={`overflow-hidden bg-card/80 backdrop-blur-sm card-3d ${cardColors[index % 4]} group animate-slide-up`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="aspect-video bg-gradient-to-br from-panda-blue/20 via-panda-purple/10 to-background overflow-hidden relative">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+                <div className="p-6 space-y-4">
+                  <h3 className={`text-2xl font-bold transition-all duration-300 ${glowColors[index % 4]}`}>
+                    {project.title}
+                  </h3>
+                  <p className="text-foreground/80">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tools.map((tool, toolIndex) => (
+                      <span
+                        key={toolIndex}
+                        className="px-3 py-1.5 bg-background/50 border border-panda-blue/30 rounded-full text-sm hover:border-panda-blue hover:bg-panda-blue/10 transition-all"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex gap-4 pt-4">
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-panda-red/50 text-panda-red hover:bg-panda-red hover:text-white hover:border-panda-red group/btn"
                     >
-                      {tool}
-                    </span>
-                  ))}
+                      <ExternalLink className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />
+                      View Demo
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="flex-1 border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white hover:border-panda-blue group/btn"
+                    >
+                      <Github className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />
+                      Source Code
+                    </Button>
+                  </div>
                 </div>
-                <div className="flex gap-4 pt-4">
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground group/btn"
-                  >
-                    <ExternalLink className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                    View Demo
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-border hover:border-primary hover:text-primary group/btn"
-                  >
-                    <Github className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />
-                    Source Code
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
