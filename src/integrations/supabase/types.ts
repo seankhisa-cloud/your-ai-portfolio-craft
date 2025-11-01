@@ -14,11 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          category: string | null
+          content: string | null
+          cover_image: string | null
+          created_at: string | null
+          id: string
+          likes: number | null
+          published: boolean | null
+          read_time: number | null
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+          views: number | null
+        }
+        Insert: {
+          category?: string | null
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string | null
+          id?: string
+          likes?: number | null
+          published?: boolean | null
+          read_time?: number | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+          views?: number | null
+        }
+        Update: {
+          category?: string | null
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string | null
+          id?: string
+          likes?: number | null
+          published?: boolean | null
+          read_time?: number | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+          views?: number | null
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string | null
           email: string
           id: string
+          is_read: boolean | null
           message: string
           name: string
         }
@@ -26,6 +72,7 @@ export type Database = {
           created_at?: string | null
           email: string
           id?: string
+          is_read?: boolean | null
           message: string
           name: string
         }
@@ -33,6 +80,7 @@ export type Database = {
           created_at?: string | null
           email?: string
           id?: string
+          is_read?: boolean | null
           message?: string
           name?: string
         }
@@ -59,6 +107,189 @@ export type Database = {
           full_name?: string | null
           id?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          created_at: string | null
+          demo_link: string | null
+          description: string | null
+          github_link: string | null
+          id: string
+          images: string[] | null
+          is_featured: boolean | null
+          tags: string[] | null
+          tech_stack: string[] | null
+          title: string
+          updated_at: string | null
+          views: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          demo_link?: string | null
+          description?: string | null
+          github_link?: string | null
+          id?: string
+          images?: string[] | null
+          is_featured?: boolean | null
+          tags?: string[] | null
+          tech_stack?: string[] | null
+          title: string
+          updated_at?: string | null
+          views?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          demo_link?: string | null
+          description?: string | null
+          github_link?: string | null
+          id?: string
+          images?: string[] | null
+          is_featured?: boolean | null
+          tags?: string[] | null
+          tech_stack?: string[] | null
+          title?: string
+          updated_at?: string | null
+          views?: number | null
+        }
+        Relationships: []
+      }
+      site_analytics: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          github_commits: number | null
+          id: string
+          page_views: number | null
+          unique_visitors: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          github_commits?: number | null
+          id?: string
+          page_views?: number | null
+          unique_visitors?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          github_commits?: number | null
+          id?: string
+          page_views?: number | null
+          unique_visitors?: number | null
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          email: string | null
+          github_username: string | null
+          id: string
+          linkedin_url: string | null
+          profile_name: string | null
+          resume_url: string | null
+          seo_description: string | null
+          seo_title: string | null
+          site_theme: string | null
+          tagline: string | null
+          twitter_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          email?: string | null
+          github_username?: string | null
+          id?: string
+          linkedin_url?: string | null
+          profile_name?: string | null
+          resume_url?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          site_theme?: string | null
+          tagline?: string | null
+          twitter_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          email?: string | null
+          github_username?: string | null
+          id?: string
+          linkedin_url?: string | null
+          profile_name?: string | null
+          resume_url?: string | null
+          seo_description?: string | null
+          seo_title?: string | null
+          site_theme?: string | null
+          tagline?: string | null
+          twitter_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: string
+          name: string
+          proficiency: number | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+          proficiency?: number | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+          proficiency?: number | null
+        }
+        Relationships: []
+      }
+      timeline_items: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          end_date: string | null
+          id: string
+          is_current: boolean | null
+          organization: string | null
+          start_date: string | null
+          title: string
+          type: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          organization?: string | null
+          start_date?: string | null
+          title: string
+          type: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          end_date?: string | null
+          id?: string
+          is_current?: boolean | null
+          organization?: string | null
+          start_date?: string | null
+          title?: string
+          type?: string
         }
         Relationships: []
       }
