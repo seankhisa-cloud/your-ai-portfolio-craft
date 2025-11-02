@@ -1,6 +1,7 @@
 import { GraduationCap, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const education = [
@@ -42,13 +43,15 @@ const About = () => {
                 My journey combines analytical thinking with real-world problem solving — bridging data, technology, and human experience.
               </p>
             </Card>
-            <Button
-              size="lg"
-              className="bg-panda-red hover:bg-panda-red/90 text-white shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:shadow-[0_0_30px_rgba(255,0,0,0.5)] group transition-all"
-            >
-              <Download className="mr-2 group-hover:translate-y-1 transition-transform" />
-              Download CV
-            </Button>
+            <Link to="/resume">
+              <Button
+                size="lg"
+                className="bg-panda-red hover:bg-panda-red/90 text-white shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:shadow-[0_0_30px_rgba(255,0,0,0.5)] group transition-all"
+              >
+                <Download className="mr-2 group-hover:translate-y-1 transition-transform" />
+                Download CV
+              </Button>
+            </Link>
           </div>
 
           {/* Education Cards */}

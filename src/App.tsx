@@ -12,6 +12,7 @@ import BlogAdmin from "./pages/BlogAdmin";
 import SkillsAdmin from "./pages/SkillsAdmin";
 import MessagesAdmin from "./pages/MessagesAdmin";
 import SettingsAdmin from "./pages/SettingsAdmin";
+import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/resume" element={<Resume />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
