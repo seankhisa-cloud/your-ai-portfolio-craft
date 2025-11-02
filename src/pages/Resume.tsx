@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from 'lucide-react';
 import { toast } from 'sonner';
+import profileImage from '@/assets/laban-profile.png';
 
 interface Skill {
   id: string;
@@ -108,7 +109,7 @@ const Resume = () => {
           <div className="flex flex-col md:flex-row gap-8 mb-8 pb-8 border-b border-border">
             <div className="flex-shrink-0">
               <img
-                src={settings?.avatar_url || '/src/assets/laban.png'}
+                src={profileImage}
                 alt={settings?.profile_name}
                 className="w-32 h-32 rounded-full object-cover border-4 border-primary"
               />
