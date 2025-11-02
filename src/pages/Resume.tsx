@@ -50,7 +50,7 @@ const Resume = () => {
       const [skillsRes, timelineRes, settingsRes] = await Promise.all([
         supabase.from('skills').select('*').order('category'),
         supabase.from('timeline_items').select('*').order('start_date', { ascending: false }),
-        supabase.from('site_settings').select('*').single(),
+        supabase.from('site_settings').select('*').maybeSingle(),
       ]);
 
       if (skillsRes.data) setSkills(skillsRes.data);
