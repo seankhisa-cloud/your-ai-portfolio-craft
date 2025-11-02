@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin } from 'lucide-react';
+import { Download, Mail, Phone, MapPin, Globe, Github, Linkedin, Home } from 'lucide-react';
 import { toast } from 'sonner';
 import profileImage from '@/assets/laban-profile.png';
 
@@ -36,6 +37,7 @@ interface SiteSettings {
 }
 
 const Resume = () => {
+  const navigate = useNavigate();
   const componentRef = useRef<HTMLDivElement>(null);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [timeline, setTimeline] = useState<TimelineItem[]>([]);
@@ -94,7 +96,11 @@ const Resume = () => {
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="container mx-auto max-w-5xl">
-        <div className="mb-6 flex justify-end print:hidden">
+        <div className="mb-6 flex justify-between print:hidden">
+          <Button onClick={() => navigate('/')} size="lg" variant="outline" className="gap-2">
+            <Home className="w-5 h-5" />
+            Back to Home
+          </Button>
           <Button onClick={handlePrint} size="lg" className="gap-2">
             <Download className="w-5 h-5" />
             Download CV as PDF
