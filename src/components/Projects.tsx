@@ -17,7 +17,7 @@ const Projects = () => {
       description: 'International business consultancy and general merchant company website with modern design, bridging trade connections between continents.',
       tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
       image: loveamerifrikah,
-      demo: '#',
+      demo: '/loveamerifrikah-demo',
       source: '#',
     },
     {
@@ -25,7 +25,7 @@ const Projects = () => {
       description: 'Professional borehole drilling and water solutions website with AI chatbot integration for customer service and consultation.',
       tools: ['React', 'Next.js', 'TailwindCSS', 'OpenAI API'],
       image: wakwetu,
-      demo: '#',
+      demo: '/wakwetu-demo',
       source: '#',
     },
     {
@@ -33,7 +33,7 @@ const Projects = () => {
       description: 'Multi-service platform app connecting customers with local stores, restaurants, drivers and service professionals for marketplace, food delivery, taxi and property services.',
       tools: ['React', 'Node.js', 'MongoDB', 'TailwindCSS'],
       image: quicklink,
-      demo: '#',
+      demo: '/quicklink-demo',
       source: '#',
     },
     {
@@ -41,7 +41,7 @@ const Projects = () => {
       description: 'AI-powered personal portfolio website showcasing projects, skills, and professional experience with modern design and smooth animations.',
       tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
       image: laban,
-      demo: '#',
+      demo: '/laban-portfolio-demo',
       source: '#',
     },
     {
@@ -49,7 +49,7 @@ const Projects = () => {
       description: 'Complex n8n workflow automations integrating multiple SaaS tools, APIs, and databases. Built custom HTTP webhook triggers, automated Slack notifications, implemented CRM data sync (HubSpot/Salesforce), scheduled report generation with email distribution, and error handling with retry logic. Automated lead qualification workflows, customer onboarding sequences, and invoice processing pipelines reducing manual work by 80%.',
       tools: ['n8n', 'REST APIs', 'Webhooks', 'PostgreSQL', 'Slack API', 'HubSpot', 'Stripe'],
       image: n8nAutomation,
-      demo: '#',
+      demo: '/n8n-demo',
       source: '#',
     },
   ];
@@ -105,11 +105,7 @@ const Projects = () => {
                   <div className="flex gap-4 pt-4">
                     <Button
                       variant="outline"
-                      onClick={() => {
-                        if (project.title === 'Enterprise Workflow Automation Platform') {
-                          navigate('/n8n-demo');
-                        }
-                      }}
+                      onClick={() => navigate(project.demo)}
                       className="flex-1 border-panda-red/50 text-panda-red hover:bg-panda-red hover:text-white hover:border-panda-red group/btn"
                     >
                       <ExternalLink className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />

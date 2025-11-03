@@ -14,6 +14,10 @@ import MessagesAdmin from "./pages/MessagesAdmin";
 import SettingsAdmin from "./pages/SettingsAdmin";
 import Resume from "./pages/Resume";
 import N8nDemo from "./pages/N8nDemo";
+import LoveAmeriAfrikahDemo from "./pages/LoveAmeriAfrikahDemo";
+import WakwetuDemo from "./pages/WakwetuDemo";
+import QuicklinkDemo from "./pages/QuicklinkDemo";
+import LabanPortfolioDemo from "./pages/LabanPortfolioDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +32,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/n8n-demo" element={<N8nDemo />} />
+          <Route path="/loveamerifrikah-demo" element={<LoveAmeriAfrikahDemo />} />
+          <Route path="/wakwetu-demo" element={<WakwetuDemo />} />
+          <Route path="/quicklink-demo" element={<QuicklinkDemo />} />
+          <Route path="/laban-portfolio-demo" element={<LabanPortfolioDemo />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
