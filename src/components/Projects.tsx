@@ -1,4 +1,5 @@
 import { ExternalLink, Github } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import loveamerifrikah from '@/assets/loveamerifrikah.png';
@@ -8,6 +9,8 @@ import laban from '@/assets/laban.png';
 import n8nAutomation from '@/assets/n8n-automation-project.png';
 
 const Projects = () => {
+  const navigate = useNavigate();
+  
   const projects = [
     {
       title: 'LoveAmeriAfrikah Enterprises',
@@ -102,6 +105,11 @@ const Projects = () => {
                   <div className="flex gap-4 pt-4">
                     <Button
                       variant="outline"
+                      onClick={() => {
+                        if (project.title === 'Enterprise Workflow Automation Platform') {
+                          navigate('/n8n-demo');
+                        }
+                      }}
                       className="flex-1 border-panda-red/50 text-panda-red hover:bg-panda-red hover:text-white hover:border-panda-red group/btn"
                     >
                       <ExternalLink className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />

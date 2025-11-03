@@ -13,6 +13,7 @@ import SkillsAdmin from "./pages/SkillsAdmin";
 import MessagesAdmin from "./pages/MessagesAdmin";
 import SettingsAdmin from "./pages/SettingsAdmin";
 import Resume from "./pages/Resume";
+import N8nDemo from "./pages/N8nDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/n8n-demo" element={<N8nDemo />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
