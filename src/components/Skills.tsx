@@ -13,6 +13,7 @@ const Skills = () => {
         'SQL',
         'React',
         'Node.js',
+        'n8n Automation Development',
         'Android Studio',
         'Firebase',
         'Supabase',

@@ -5,6 +5,7 @@ import loveamerifrikah from '@/assets/loveamerifrikah.png';
 import wakwetu from '@/assets/wakwetu.png';
 import quicklink from '@/assets/quicklink.png';
 import laban from '@/assets/laban.png';
+import n8nAutomation from '@/assets/n8n-automation-project.png';
 
 const Projects = () => {
   const projects = [
@@ -37,6 +38,14 @@ const Projects = () => {
       description: 'AI-powered personal portfolio website showcasing projects, skills, and professional experience with modern design and smooth animations.',
       tools: ['React', 'TypeScript', 'TailwindCSS', 'Vite'],
       image: laban,
+      demo: '#',
+      source: '#',
+    },
+    {
+      title: 'Enterprise Workflow Automation Platform',
+      description: 'Complex n8n workflow automations integrating multiple SaaS tools, APIs, and databases. Built custom HTTP webhook triggers, automated Slack notifications, implemented CRM data sync (HubSpot/Salesforce), scheduled report generation with email distribution, and error handling with retry logic. Automated lead qualification workflows, customer onboarding sequences, and invoice processing pipelines reducing manual work by 80%.',
+      tools: ['n8n', 'REST APIs', 'Webhooks', 'PostgreSQL', 'Slack API', 'HubSpot', 'Stripe'],
+      image: n8nAutomation,
       demo: '#',
       source: '#',
     },
