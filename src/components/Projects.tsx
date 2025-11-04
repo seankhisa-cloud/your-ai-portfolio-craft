@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import ContactModal from '@/components/ContactModal';
 import loveamerifrikah from '@/assets/loveamerifrikah.png';
 import wakwetu from '@/assets/wakwetu.png';
 import quicklink from '@/assets/quicklink.png';
@@ -10,6 +12,8 @@ import n8nAutomation from '@/assets/n8n-automation-project.png';
 
 const Projects = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState('');
   
   const projects = [
     {
@@ -113,6 +117,10 @@ const Projects = () => {
                     </Button>
                     <Button
                       variant="outline"
+                      onClick={() => {
+                        setSelectedProject(project.title);
+                        setIsModalOpen(true);
+                      }}
                       className="flex-1 border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white hover:border-panda-blue group/btn"
                     >
                       <Github className="mr-2 w-4 h-4 group-hover/btn:scale-110 transition-transform" />
@@ -125,6 +133,12 @@ const Projects = () => {
           })}
         </div>
       </div>
+      
+      <ContactModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        initialMessage={`Hi 👋 I'd like to request access to the source code for ${selectedProject}.`}
+      />
     </section>
   );
 };
