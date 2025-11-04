@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { ArrowLeft, Droplets, MessageSquare, MapPin, Phone, Mail } from 'lucide-react';
+import { ArrowLeft, Droplets, MessageSquare, MapPin, Phone, Mail, CheckCircle, Send } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import wakwetu from '@/assets/wakwetu.png';
 
@@ -16,10 +17,10 @@ const WakwetuDemo = () => {
   const [userInput, setUserInput] = useState('');
 
   const services = [
-    { title: 'Borehole Drilling', price: 'From $2,500', description: 'Professional drilling up to 100m depth' },
-    { title: 'Water Quality Testing', price: '$150', description: 'Comprehensive water analysis' },
-    { title: 'Pump Installation', price: 'From $800', description: 'Solar & electric pump systems' },
-    { title: 'Maintenance', price: '$100/visit', description: 'Regular maintenance & repairs' },
+    { title: 'Borehole Drilling', price: 'From $2,500', description: 'Professional drilling up to 100m depth', icon: Droplets },
+    { title: 'Water Quality Testing', price: '$150', description: 'Comprehensive water analysis', icon: CheckCircle },
+    { title: 'Pump Installation', price: 'From $800', description: 'Solar & electric pump systems', icon: Droplets },
+    { title: 'Maintenance', price: '$100/visit', description: 'Regular maintenance & repairs', icon: CheckCircle },
   ];
 
   const aiResponses = [
@@ -82,14 +83,17 @@ const WakwetuDemo = () => {
             </div>
             <h2 className="text-3xl font-bold mb-4 text-3d-blue">Our Services</h2>
             <div className="grid sm:grid-cols-2 gap-4">
-              {services.map((service, index) => (
-                <div key={index} className="p-4 bg-background/50 rounded-lg border border-panda-blue/20">
-                  <Droplets className="w-8 h-8 text-panda-blue mb-2" />
-                  <h3 className="font-bold mb-1">{service.title}</h3>
-                  <p className="text-panda-blue font-semibold mb-2">{service.price}</p>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
-                </div>
-              ))}
+              {services.map((service, index) => {
+                const ServiceIcon = service.icon;
+                return (
+                  <div key={index} className="p-4 bg-background/50 rounded-lg border border-panda-blue/20 hover:border-panda-blue/40 transition-all group">
+                    <ServiceIcon className="w-8 h-8 text-panda-blue mb-2 group-hover:scale-110 transition-transform" />
+                    <h3 className="font-bold mb-1">{service.title}</h3>
+                    <Badge variant="secondary" className="mb-2">{service.price}</Badge>
+                    <p className="text-sm text-muted-foreground">{service.description}</p>
+                  </div>
+                );
+              })}
             </div>
             <Button onClick={handleQuoteRequest} className="w-full mt-6">
               Request Free Quote
@@ -125,7 +129,9 @@ const WakwetuDemo = () => {
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
               />
-              <Button type="submit">Send</Button>
+              <Button type="submit" size="icon">
+                <Send className="w-4 h-4" />
+              </Button>
             </form>
           </Card>
         </div>

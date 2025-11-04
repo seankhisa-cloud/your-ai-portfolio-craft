@@ -1,16 +1,25 @@
 import { useState } from 'react';
-import { ArrowLeft, ShoppingBag, Utensils, Car, Home, Search, MapPin } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Utensils, Car, Home, Search, MapPin, Star, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import quicklink from '@/assets/quicklink.png';
 
 const QuicklinkDemo = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState('');
+
+  const handleAction = (type: string, name: string) => {
+    toast({
+      title: `${type} Successful!`,
+      description: `${name} has been added to your orders.`,
+    });
+  };
 
   const services = [
     { 
@@ -119,7 +128,10 @@ const QuicklinkDemo = () => {
                     <Card key={itemIndex} className="p-6 card-3d hover:scale-105 transition-transform">
                       <div className="flex items-start justify-between mb-4">
                         <Icon className={`w-8 h-8 ${service.color}`} />
-                        <Badge variant="secondary">★ {item.rating}</Badge>
+                        <Badge variant="secondary" className="flex items-center gap-1">
+                          <Star className="w-3 h-3 fill-current" />
+                          {item.rating}
+                        </Badge>
                       </div>
                       <h3 className="text-xl font-bold mb-2">{item.name}</h3>
                       <div className="space-y-2 text-muted-foreground">
@@ -128,13 +140,23 @@ const QuicklinkDemo = () => {
                           <span className="text-sm">{item.distance}</span>
                         </div>
                         {item.time && (
-                          <p className="text-sm">Delivery: {item.time}</p>
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4" />
+                            <span className="text-sm">{item.time}</span>
+                          </div>
                         )}
                         {item.price && (
                           <p className="text-sm font-semibold text-foreground">{item.price}</p>
                         )}
                       </div>
-                      <Button className="w-full mt-4">
+                      <Button 
+                        className="w-full mt-4"
+                        onClick={() => handleAction(
+                          service.title === 'Marketplace' || service.title === 'Food Delivery' ? 'Order' : 
+                          service.title === 'Taxi Service' ? 'Booking' : 'Request',
+                          item.name
+                        )}
+                      >
                         {service.title === 'Marketplace' || service.title === 'Food Delivery' ? 'Order Now' : 
                          service.title === 'Taxi Service' ? 'Book Ride' : 'View Details'}
                       </Button>

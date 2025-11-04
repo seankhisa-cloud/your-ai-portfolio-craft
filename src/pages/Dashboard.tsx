@@ -102,8 +102,24 @@ const Dashboard = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center text-gray-400">
-              GitHub contribution graph - Connect GitHub API
+            <div className="space-y-3">
+              {[
+                { repo: 'portfolio-website', commits: 15, date: '2 days ago' },
+                { repo: 'quicklink-platform', commits: 8, date: '3 days ago' },
+                { repo: 'wakwetu-app', commits: 12, date: '5 days ago' },
+                { repo: 'loveamerifrikah-site', commits: 6, date: '1 week ago' },
+              ].map((activity, idx) => (
+                <div key={idx} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border border-panda-purple/20">
+                  <div className="flex items-center gap-3">
+                    <Github className="text-panda-purple" size={16} />
+                    <div>
+                      <p className="font-medium">{activity.repo}</p>
+                      <p className="text-xs text-muted-foreground">{activity.commits} commits</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-muted-foreground">{activity.date}</span>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
