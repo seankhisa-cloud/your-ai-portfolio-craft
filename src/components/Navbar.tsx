@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, isAdmin, signOut } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -58,6 +63,35 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
+            {user ? (
+              <>
+                {isAdmin && (
+                  <Button
+                    variant="outline"
+                    onClick={() => navigate('/admin')}
+                    className="border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white"
+                  >
+                    Admin
+                  </Button>
+                )}
+                <Button
+                  variant="outline"
+                  onClick={() => signOut()}
+                  className="border-panda-red/50 text-panda-red hover:bg-panda-red hover:text-white"
+                >
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="outline"
+                onClick={() => navigate('/auth')}
+                className="border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white"
+              >
+                <LogIn className="mr-2 w-4 h-4" />
+                Sign In
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,6 +118,44 @@ const Navbar = () => {
                   {item.label}
                 </button>
               ))}
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        navigate('/admin');
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white"
+                    >
+                      Admin
+                    </Button>
+                  )}
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      signOut();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="border-panda-red/50 text-panda-red hover:bg-panda-red hover:text-white"
+                  >
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    navigate('/auth');
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="border-panda-blue/50 text-panda-blue hover:bg-panda-blue hover:text-white"
+                >
+                  <LogIn className="mr-2 w-4 h-4" />
+                  Sign In
+                </Button>
+              )}
             </div>
           </div>
         )}
