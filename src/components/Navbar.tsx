@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar = () => {
@@ -32,6 +32,7 @@ const Navbar = () => {
     { label: 'About', id: 'about' },
     { label: 'Skills', id: 'skills' },
     { label: 'Projects', id: 'projects' },
+    { label: 'Blog', id: '/blog', isRoute: true },
     { label: 'Education', id: 'education' },
     { label: 'Contact', id: 'contact' },
   ];
@@ -54,14 +55,25 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-foreground hover:text-primary transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-              </button>
+              item.isRoute ? (
+                <Link
+                  key={item.id}
+                  to={item.id}
+                  className="text-foreground hover:text-primary transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-foreground hover:text-primary transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </button>
+              )
             ))}
             {user ? (
               <>
@@ -110,13 +122,24 @@ const Navbar = () => {
           <div className="md:hidden mt-4 pb-4 animate-fade-in">
             <div className="flex flex-col gap-4">
               {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="text-foreground hover:text-primary transition-colors text-left py-2"
-                >
-                  {item.label}
-                </button>
+                item.isRoute ? (
+                  <Link
+                    key={item.id}
+                    to={item.id}
+                    className="text-foreground hover:text-primary transition-colors text-left py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className="text-foreground hover:text-primary transition-colors text-left py-2"
+                  >
+                    {item.label}
+                  </button>
+                )
               ))}
               {user ? (
                 <>
