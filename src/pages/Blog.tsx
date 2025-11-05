@@ -103,8 +103,9 @@ const Blog = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPosts.map((post) => (
-                <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                  {post.cover_image && (
+                <Link key={post.id} to={`/blog/${post.id}`}>
+                  <Card className="group hover:shadow-lg transition-all duration-300 overflow-hidden h-full">
+                    {post.cover_image && (
                     <div className="w-full h-48 overflow-hidden">
                       <img
                         src={post.cover_image}
@@ -162,6 +163,7 @@ const Blog = () => {
                     </div>
                   </CardContent>
                 </Card>
+              </Link>
               ))}
             </div>
           )}
