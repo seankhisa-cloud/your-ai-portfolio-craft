@@ -4,26 +4,19 @@ import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
+import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { Users, FileText, MessageSquare, TrendingUp, Eye, Heart } from "lucide-react";
 
-interface Profile {
-  id: string;
-  email: string;
-  full_name: string;
-  created_at: string;
-}
-
-interface ContactSubmission {
-  id: string;
-  name: string;
-  email: string;
-  message: string;
-  created_at: string;
-}
-
-interface UserRole {
-  role: string;
+interface AnalyticsData {
+  totalUsers: number;
+  totalBlogPosts: number;
+  totalComments: number;
+  totalViews: number;
+  totalLikes: number;
+  userRegistrationTrend: { date: string; count: number }[];
+  blogEngagement: { title: string; views: number; comments: number; likes: number }[];
+  commentActivity: { date: string; count: number }[];
 }
 
 const AdminDashboard = () => {
@@ -31,10 +24,20 @@ const AdminDashboard = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [profiles, setProfiles] = useState<Profile[]>([]);
-  const [contactSubmissions, setContactSubmissions] = useState<ContactSubmission[]>([]);
+  const [analytics, setAnalytics] = useState<AnalyticsData>({
+    totalUsers: 0,
+    totalBlogPosts: 0,
+    totalComments: 0,
+    totalViews: 0,
+    totalLikes: 0,
+    userRegistrationTrend: [],
+    blogEngagement: [],
+    commentActivity: [],
+  });
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const COLORS = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--accent))', 'hsl(var(--muted))'];
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -92,13 +95,78 @@ const AdminDashboard = () => {
   };
 
   const loadDashboardData = async () => {
-    const [profilesRes, contactsRes] = await Promise.all([
-      supabase.from("profiles").select("*").order("created_at", { ascending: false }),
-      supabase.from("contact_submissions").select("*").order("created_at", { ascending: false }),
-    ]);
+    try {
+      const [profilesRes, blogPostsRes, commentsRes] = await Promise.all([
+        supabase.from("profiles").select("*").order("created_at", { ascending: false }),
+        supabase.from("blog_posts").select("*"),
+        supabase.from("blog_comments").select("*, blog_posts(title)"),
+      ]);
 
-    if (profilesRes.data) setProfiles(profilesRes.data);
-    if (contactsRes.data) setContactSubmissions(contactsRes.data);
+      // Calculate totals
+      const totalUsers = profilesRes.data?.length || 0;
+      const totalBlogPosts = blogPostsRes.data?.length || 0;
+      const totalComments = commentsRes.data?.length || 0;
+      const totalViews = blogPostsRes.data?.reduce((sum, post) => sum + (post.views || 0), 0) || 0;
+      const totalLikes = blogPostsRes.data?.reduce((sum, post) => sum + (post.likes || 0), 0) || 0;
+
+      // User registration trend (last 30 days)
+      const userRegistrationTrend = calculateTrend(profilesRes.data || [], 30);
+
+      // Blog engagement (top 5 posts)
+      const blogEngagement = (blogPostsRes.data || [])
+        .map(post => ({
+          title: post.title.substring(0, 30) + (post.title.length > 30 ? '...' : ''),
+          views: post.views || 0,
+          comments: commentsRes.data?.filter(c => c.blog_post_id === post.id).length || 0,
+          likes: post.likes || 0,
+        }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 5);
+
+      // Comment activity (last 30 days)
+      const commentActivity = calculateTrend(commentsRes.data || [], 30);
+
+      setAnalytics({
+        totalUsers,
+        totalBlogPosts,
+        totalComments,
+        totalViews,
+        totalLikes,
+        userRegistrationTrend,
+        blogEngagement,
+        commentActivity,
+      });
+    } catch (error) {
+      console.error("Error loading analytics:", error);
+      toast({
+        title: "Error",
+        description: "Failed to load analytics data",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const calculateTrend = (data: any[], days: number) => {
+    const trend = [];
+    const now = new Date();
+    
+    for (let i = days - 1; i >= 0; i--) {
+      const date = new Date(now);
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      
+      const count = data.filter(item => {
+        const itemDate = new Date(item.created_at).toISOString().split('T')[0];
+        return itemDate === dateStr;
+      }).length;
+      
+      trend.push({
+        date: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        count,
+      });
+    }
+    
+    return trend;
   };
 
   const handleLogout = async () => {
@@ -119,11 +187,11 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-bold">Admin Dashboard</h1>
-          <div className="space-x-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold">Analytics Dashboard</h1>
+          <div className="flex gap-2">
             <Button variant="outline" onClick={() => navigate("/")}>
               Back to Site
             </Button>
@@ -133,63 +201,139 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="grid gap-6">
+        {/* Key Metrics */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <Card>
-            <CardHeader>
-              <CardTitle>User Profiles</CardTitle>
-              <CardDescription>Manage all registered users</CardDescription>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+              <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Joined</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {profiles.map((profile) => (
-                    <TableRow key={profile.id}>
-                      <TableCell>{profile.full_name}</TableCell>
-                      <TableCell>{profile.email}</TableCell>
-                      <TableCell>{new Date(profile.created_at).toLocaleDateString()}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <div className="text-2xl font-bold">{analytics.totalUsers}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Blog Posts</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{analytics.totalBlogPosts}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Comments</CardTitle>
+              <MessageSquare className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{analytics.totalComments}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Views</CardTitle>
+              <Eye className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{analytics.totalViews}</div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Likes</CardTitle>
+              <Heart className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{analytics.totalLikes}</div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Charts */}
+        <div className="grid gap-6 md:grid-cols-2 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>User Registration Trend</CardTitle>
+              <CardDescription>Last 30 days</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={analytics.userRegistrationTrend}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" />
+                  <YAxis stroke="hsl(var(--muted-foreground))" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px'
+                    }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="count" stroke="hsl(var(--primary))" strokeWidth={2} name="New Users" />
+                </LineChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Contact Submissions</CardTitle>
-              <CardDescription>View all contact form submissions</CardDescription>
+              <CardTitle>Comment Activity</CardTitle>
+              <CardDescription>Last 30 days</CardDescription>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Message</TableHead>
-                    <TableHead>Date</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {contactSubmissions.map((submission) => (
-                    <TableRow key={submission.id}>
-                      <TableCell>{submission.name}</TableCell>
-                      <TableCell>{submission.email}</TableCell>
-                      <TableCell className="max-w-xs truncate">{submission.message}</TableCell>
-                      <TableCell>{new Date(submission.created_at).toLocaleDateString()}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <ResponsiveContainer width="100%" height={300}>
+                <LineChart data={analytics.commentActivity}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" />
+                  <YAxis stroke="hsl(var(--muted-foreground))" />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))',
+                      border: '1px solid hsl(var(--border))',
+                      borderRadius: '8px'
+                    }}
+                  />
+                  <Legend />
+                  <Line type="monotone" dataKey="count" stroke="hsl(var(--secondary))" strokeWidth={2} name="Comments" />
+                </LineChart>
+              </ResponsiveContainer>
             </CardContent>
           </Card>
         </div>
+
+        {/* Blog Engagement */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Blog Post Engagement</CardTitle>
+            <CardDescription>Top 5 posts by views</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart data={analytics.blogEngagement}>
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                <XAxis dataKey="title" stroke="hsl(var(--muted-foreground))" />
+                <YAxis stroke="hsl(var(--muted-foreground))" />
+                <Tooltip 
+                  contentStyle={{ 
+                    backgroundColor: 'hsl(var(--card))',
+                    border: '1px solid hsl(var(--border))',
+                    borderRadius: '8px'
+                  }}
+                />
+                <Legend />
+                <Bar dataKey="views" fill="hsl(var(--primary))" name="Views" />
+                <Bar dataKey="comments" fill="hsl(var(--secondary))" name="Comments" />
+                <Bar dataKey="likes" fill="hsl(var(--accent))" name="Likes" />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
