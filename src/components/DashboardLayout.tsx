@@ -11,7 +11,8 @@ import {
   Menu,
   X,
   Bell,
-  Search
+  Search,
+  Home
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -105,6 +106,14 @@ const DashboardLayout = () => {
           </div>
           
           <div className="flex items-center gap-4">
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/")}
+              className="gap-2 border-panda-blue/20 text-panda-blue hover:bg-panda-blue/10"
+            >
+              <Home size={20} />
+              <span className="hidden md:inline">Home</span>
+            </Button>
             <Button variant="ghost" size="icon" className="relative">
               <Bell size={20} className="text-gray-400" />
               <span className="absolute top-2 right-2 w-2 h-2 bg-panda-red rounded-full"></span>
