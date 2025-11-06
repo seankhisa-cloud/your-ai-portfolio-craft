@@ -360,6 +360,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_public_blog_comments: {
+        Args: { post_id: string }
+        Returns: {
+          author_name: string
+          blog_post_id: string
+          content: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }[]
+      }
+      get_public_site_settings: {
+        Args: never
+        Returns: {
+          avatar_url: string
+          bio: string
+          github_username: string
+          id: string
+          linkedin_url: string
+          profile_name: string
+          resume_url: string
+          seo_description: string
+          seo_title: string
+          site_theme: string
+          tagline: string
+          twitter_url: string
+          updated_at: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
