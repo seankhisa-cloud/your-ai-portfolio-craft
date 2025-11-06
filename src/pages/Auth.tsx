@@ -100,10 +100,10 @@ const Auth = () => {
       <Card className="w-full max-w-md card-3d-blue border-panda-blue/20">
         <CardHeader>
           <CardTitle className="text-3xl text-center text-3d-blue">
-            {isSignUp ? "Create Account" : "Admin Login"}
+            {isSignUp ? "Create Account" : "Sign In"}
           </CardTitle>
           <CardDescription className="text-center text-gray-400">
-            {isSignUp ? "Sign up for an account" : "Portfolio Dashboard Access"}
+            {isSignUp ? "Sign up for an account" : "Sign in to your account"}
           </CardDescription>
         </CardHeader>
         <CardContent>
