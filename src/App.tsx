@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import ProjectsAdmin from "./pages/ProjectsAdmin";
 import BlogAdmin from "./pages/BlogAdmin";
 import SkillsAdmin from "./pages/SkillsAdmin";
+import EducationAdmin from "./pages/EducationAdmin";
 import MessagesAdmin from "./pages/MessagesAdmin";
 import SettingsAdmin from "./pages/SettingsAdmin";
 import Resume from "./pages/Resume";
@@ -53,6 +54,7 @@ const App = () => (
               <Route path="projects" element={<ProjectsAdmin />} />
               <Route path="blog" element={<BlogAdmin />} />
               <Route path="skills" element={<SkillsAdmin />} />
+              <Route path="education" element={<EducationAdmin />} />
               <Route path="messages" element={<MessagesAdmin />} />
               <Route path="settings" element={<SettingsAdmin />} />
             </Route>

@@ -12,7 +12,8 @@ import {
   X,
   Bell,
   Search,
-  Home
+  Home,
+  GraduationCap
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ const DashboardLayout = () => {
     { to: "/admin/projects", icon: FolderKanban, label: "Projects" },
     { to: "/admin/blog", icon: FileText, label: "Blog" },
     { to: "/admin/skills", icon: Brain, label: "Skills & Resume" },
+    { to: "/admin/education", icon: GraduationCap, label: "Education" },
     { to: "/admin/messages", icon: MessageSquare, label: "Messages" },
     { to: "/admin/settings", icon: Settings, label: "Settings" },
   ];
